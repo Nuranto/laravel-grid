@@ -299,7 +299,7 @@ trait CreatesColumns
                 // check for dates
                 if (isset($columnData['date'])) {
                     $data = function ($item, $row) use ($columnData) {
-                        return Carbon::parse($item->{$row})->format($columnData['dateFormat'] ?? 'Y-m-d');
+                        return $item->{$row} ? Carbon::parse($item->{$row})->format($columnData['dateFormat'] ?? 'Y-m-d') : '';
                     };
                 } else {
                     // default processing strategy. Just access the attribute on the eloquent instance
