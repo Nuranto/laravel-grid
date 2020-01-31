@@ -1,6 +1,6 @@
 {
-  "name": "leantony/laravel-grid",
-  "description": "A grid view for laravel, inspired by the yii2 grid widget",
+  "name": "nuranto/laravel-grid",
+  "description": "Personnal version of abandonned package leantony/laravel-grid",
   "license": "MIT",
   "type": "library",
   "keywords": [
@@ -13,11 +13,16 @@
     "laravel-5",
     "laravel5"
   ],
-  "homepage": "https://github.com/leantony/laravel-grid",
+  "homepage": "https://github.com/nuranto/laravel-grid",
   "authors": [
     {
       "name": "Antony [leantony] Chacha",
       "email": "chachaantony@gmail.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Vincent Enjalbert",
+      "email": "chef@web-cooking.net",
       "role": "Developer"
     }
   ],
