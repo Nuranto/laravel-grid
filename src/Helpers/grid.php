@@ -14,12 +14,12 @@ if (!function_exists('add_query_param')) {
     function add_query_param()
     {
         if (func_num_args() === 0) {
-            return array_merge(request()->query(), []);
+            return array_merge(request()->query(), request()->route()->parameters());
         }
 
         $values = collect(func_get_args())->collapse()->toArray();
 
-        return array_merge(request()->query(), $values);
+        return array_merge(request()->query(), request()->route()->parameters(), $values);
     }
 }
 
