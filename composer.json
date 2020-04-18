@@ -9,9 +9,7 @@
     "laravel-grid",
     "laravel",
     "pjax",
-    "grid",
-    "laravel-5",
-    "laravel5"
+    "grid"
   ],
   "homepage": "https://github.com/nuranto/laravel-grid",
   "authors": [
@@ -27,24 +25,24 @@
     }
   ],
   "require": {
-    "illuminate/view": "~5.5|~6",
-    "illuminate/support": "~5.5|~6",
-    "illuminate/console": "~5.5|~6",
-    "illuminate/contracts": "~5.5|~6",
-    "illuminate/http": "~5.5|~6",
-    "illuminate/database": "~5.5|~6",
-    "illuminate/pagination": "~5.5|~6"
+    "illuminate/view": "~6|~7",
+    "illuminate/support": "~6|~7",
+    "illuminate/console": "~6|~7",
+    "illuminate/contracts": "~6|~7",
+    "illuminate/http": "~6|~7",
+    "illuminate/database": "~6|~7",
+    "illuminate/pagination": "~6|~7"
   },
   "suggest": {
     "maatwebsite/excel": "For exporting grid data as excel (~3.0)",
     "barryvdh/laravel-dompdf": "For exporting grid data as PDF (^0.8.2)"
   },
   "require-dev": {
-    "phpunit/phpunit": "~7.0|~8.0",
+    "phpunit/phpunit": "~8.0",
     "orchestra/testbench": "~3.0",
     "orchestra/testbench-dusk": "^3.5",
     "phpunit/php-code-coverage": "^6.0|^7.05",
-    "barryvdh/laravel-dompdf": "^0.8.2",
+    "barryvdh/laravel-dompdf": "^0.8",
     "maatwebsite/excel": "^3.0"
   },
   "autoload": {
