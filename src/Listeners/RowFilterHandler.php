@@ -52,7 +52,7 @@ class RowFilterHandler
                     continue;
                 }
                 // column check. Since the column data is coming from a user query
-                if (!$this->canUseProvidedColumn($columnName, $tableColumns)) {
+                if (!isset($columnData['filter']['query']) && !$this->canUseProvidedColumn($columnName, $tableColumns)) {
                     continue;
                 }
                 $operator = $this->extractFilterOperator($columnName, $columnData)['operator'];
