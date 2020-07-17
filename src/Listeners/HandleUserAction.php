@@ -28,7 +28,16 @@ class HandleUserAction
      */
     public function handle(UserActionRequested $event)
     {
+        $parametersKey = $event->grid->getSessionFiltersKey();
+        if ($event->grid->saveFiltersInSession() && empty($event->request->query()) && $event->request->session()->has($parametersKey)) {
+            $event->request->merge($event->request->session()->get($parametersKey));
+        } elseif($event->request->query('reset')) {
+            $event->request->session()->forget($parametersKey);
+            \App::abort(302, '', ['Location' => url()->current()]);
+        }
+        
         if (!empty($event->request->query())) {
+            $event->request->session()->put($parametersKey, $event->request->query());
 
             if ($event->request->has($event->grid->getGridSearchParam())) {
                 // search

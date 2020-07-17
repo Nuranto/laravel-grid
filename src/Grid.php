@@ -110,6 +110,10 @@ abstract class Grid implements Htmlable, GridInterface, GridButtonsInterface, Gr
      * @var array
      */
     protected $tableColumns = [];
+    
+    
+    
+    protected $saveFiltersInSession = true;
 
     /**
      * Create the grid
@@ -434,6 +438,27 @@ abstract class Grid implements Htmlable, GridInterface, GridButtonsInterface, Gr
     public function warnIfEmpty()
     {
         return $this->gridShouldWarnIfEmpty();
+    }
+    
+    
+    public function saveFiltersInSession()
+    {
+        return $this->saveFiltersInSession;
+    }
+    
+    public function getSessionFiltersKey() {
+        return 'grid_params_'.get_class($this);
+    }
+    
+    public function getSessionFilters($strict = false) {
+        if($this->saveFiltersInSession() || $strict) {
+            return session($this->getSessionFiltersKey());
+        }
+        return null;
+    }
+    
+    public function isFiltered() {
+        return (bool) $this->getSessionFilters();
     }
 
     /**

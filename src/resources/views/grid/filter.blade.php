@@ -13,9 +13,18 @@
             <div class="pull-right">
                 <button type="submit"
                         class="btn btn-outline-primary grid-filter-button"
-                        title="filter data"
-                        form="{{ $formId }}">Filter&nbsp;<i class="fa fa-filter"></i>
+                        title="{{ __('Filter data') }}"
+                        form="{{ $formId }}"><i class="fa fa-filter"></i> {{ __('Filter') }}
                 </button>
+                @if( $grid->isFiltered() )
+                    <input type="hidden" name="reset" id="grid_filter_reset" value="0" form="{{ $formId }}"/>
+                    <button type="submit"
+                            class="btn btn-outline-primary grid-reset-button"
+                            title="{{ __('Filter filters') }}"
+                            onclick="javascript:jQuery('#grid_filter_reset').val(1);return true;"
+                            form="{{ $formId }}"><i class="fas fa-minus"></i> {{ __('Reset') }}
+                    </button>
+                @endif
             </div>
         </th>
     @endif
