@@ -154,7 +154,9 @@ class RowFilterHandler
                     }
                 }
             } else {
-                $this->getQuery()->where($columnName, $operator, $value, $this->getGrid()->getGridFilterQueryType());
+                
+                $tableName = call_user_func($this->grid->getGridDatabaseTable());
+                $this->getQuery()->where($tableName . '.' . $columnName, $operator, $value, $this->getGrid()->getGridFilterQueryType());
             }
         }
     }

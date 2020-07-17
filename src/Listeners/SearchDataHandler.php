@@ -142,8 +142,9 @@ class SearchDataHandler
                 } else {
                     $value = $userInput;
                 }
-
-                $this->getQuery()->where($columnName, $operator, $value, $this->getGrid()->getGridSearchQueryType());
+                
+                $tableName = call_user_func($this->grid->getGridDatabaseTable());
+                $this->getQuery()->where($tableName . '.' . $columnName, $operator, $value, $this->getGrid()->getGridSearchQueryType());
             }
         }
     }
