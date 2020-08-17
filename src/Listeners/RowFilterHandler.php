@@ -56,8 +56,9 @@ class RowFilterHandler
                     continue;
                 }
                 $operator = $this->extractFilterOperator($columnName, $columnData)['operator'];
-
-                $this->doFilter($columnName, $columnData, $operator, $this->getRequest()->get($columnName));
+                $logicalOperator = $this->extractFilterLogicalOperator($columnName, $columnData)['logical_operator'];
+                
+                $this->doFilter($columnName, $columnData, $operator, $this->getRequest()->get($columnName), $logicalOperator);
             }
         }
     }
@@ -83,6 +84,9 @@ class RowFilterHandler
     public function canUseProvidedUserInput($userInput)
     {
         // skip empty requests
+        if(is_array($userInput)) {
+            return count($userInput) > 0;
+        }
         if ($userInput === null || strlen(trim($userInput)) < 1) {
             return false;
         }
@@ -115,6 +119,19 @@ class RowFilterHandler
     }
 
     /**
+     * Extract filter operator
+     *
+     * @param string $columnName
+     * @param array $columnData
+     * @return array
+     */
+    public function extractFilterLogicalOperator(string $columnName, array $columnData)
+    {
+        $logical_operator = $columnData['filter']['logical_operator'] ?? 'AND';
+        return compact('logical_operator');
+    }
+
+    /**
      * Filter the data
      *
      * @param string $columnName
@@ -123,7 +140,7 @@ class RowFilterHandler
      * @param string $userInput
      * @return void
      */
-    public function doFilter(string $columnName, array $columnData, string $operator, string $userInput)
+    public function doFilter(string $columnName, array $columnData, string $operator, $userInput, string $logicalOperator = 'AND')
     {
         $filter = $columnData['filter'] ?? [];
         $data = $columnData['data'] ?? [];
@@ -156,7 +173,13 @@ class RowFilterHandler
             } else {
                 
                 $tableName = call_user_func($this->grid->getGridDatabaseTable());
-                $this->getQuery()->where($tableName . '.' . $columnName, $operator, $value, $this->getGrid()->getGridFilterQueryType());
+                if(is_array($value) && $logicalOperator == 'AND') {
+                    foreach($value as $v) {
+                        $this->getQuery()->where($tableName . '.' . $columnName, $operator, $v, $this->getGrid()->getGridFilterQueryType());
+                    }
+                } else {
+                    $this->getQuery()->where($tableName . '.' . $columnName, $operator, $value, $this->getGrid()->getGridFilterQueryType());
+                }
             }
         }
     }

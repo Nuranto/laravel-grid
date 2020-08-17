@@ -16,6 +16,7 @@ trait AddsColumnFilters
     protected static $FILTER_DATE_RANGE = "daterange";
     protected static $FILTER_TEXT = "text";
     protected static $FILTER_SELECT = "select";
+    protected static $FILTER_MULTISELECT = "multiselect";
     protected static $FILTER_BOOLEAN = "boolean";
 
     protected $defaultBooleanData = [0 => 'False', 1 => 'True'];
@@ -64,6 +65,13 @@ trait AddsColumnFilters
                     {
                         $filterInstance = $this->addSelectFilter(
                             $filterEnabled, $columnName, $columnData['data'] ?? []
+                        );
+                        break;
+                    }
+                case self::$FILTER_MULTISELECT:
+                    {
+                        $filterInstance = $this->addSelectFilter(
+                            $filterEnabled, $columnName, $columnData['data'] ?? [], null, true
                         );
                         break;
                     }
@@ -154,7 +162,7 @@ trait AddsColumnFilters
      * @return GenericFilter
      * @throws \Exception
      */
-    protected function addSelectFilter($enabled, $elementId, $data, $elementClass = null): GenericFilter
+    protected function addSelectFilter($enabled, $elementId, $data, $elementClass = null, $multiple = false): GenericFilter
     {
         $filter = new GenericFilter([
             'name' => $elementId,
@@ -162,6 +170,7 @@ trait AddsColumnFilters
             'enabled' => $enabled,
             'formId' => $this->getFilterFormId(),
             'type' => 'select',
+            'multiple' => 'multiple',
             'class' => 'form-control grid-filter' . $elementClass,
             'data' => $data,
         ]);

@@ -163,6 +163,7 @@ class GenericFilter implements Htmlable
                     Arr::collapse(func_get_args())
                 ))->render();
             case 'select':
+            case 'multiselect':
                 return view('leantony::grid.filters.dropdown', $this->compactData(
                     Arr::collapse(func_get_args())
                 ))->render();
