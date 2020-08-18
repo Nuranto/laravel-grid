@@ -4,6 +4,26 @@
  * @author Antony [leantony] Chacha
  */
 
+ 
+if (!function_exists('add_route_param')) {
+
+    /**
+     * Add query parameters to a url. Existing ones would be included
+     *
+     * @return array
+     */
+    function add_route_param()
+    {
+        if (func_num_args() === 0) {
+            return array_merge(request()->route()->parameters());
+        }
+
+        $values = collect(func_get_args())->collapse()->toArray();
+
+        return array_merge(request()->route()->parameters(), $values);
+    }
+}
+ 
 if (!function_exists('add_query_param')) {
 
     /**

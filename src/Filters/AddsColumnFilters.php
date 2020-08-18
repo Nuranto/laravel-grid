@@ -170,7 +170,7 @@ trait AddsColumnFilters
             'enabled' => $enabled,
             'formId' => $this->getFilterFormId(),
             'type' => 'select',
-            'multiple' => 'multiple',
+            'multiple' => $multiple,
             'class' => 'form-control grid-filter' . $elementClass,
             'data' => $data,
         ]);
