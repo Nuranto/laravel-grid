@@ -173,7 +173,15 @@ class RowFilterHandler
             } else {
                 
                 $tableName = call_user_func($this->grid->getGridDatabaseTable());
-                if(is_array($value) && $logicalOperator == 'AND') {
+                if(is_array($value) &&  ($columnData['filter']['type']??false) =='date' ) {
+                    if(($value['from']??false) && ($value['to']??false)) { 
+                        $this->getQuery()->whereBetween($tableName . '.' . $columnName, [$value['from'], $value['to']], $this->getGrid()->getGridFilterQueryType());
+                    } else if(($value['from']??false)) {
+                        $this->getQuery()->where($tableName . '.' . $columnName, '>=', $value['from'], $this->getGrid()->getGridFilterQueryType());
+                    } else if(($value['to']??false)) {
+                        $this->getQuery()->where($tableName . '.' . $columnName, '<=', $value['to'], $this->getGrid()->getGridFilterQueryType());
+                    }
+                } else if(is_array($value) && $logicalOperator == 'AND') {
                     foreach($value as $v) {
                         $this->getQuery()->where($tableName . '.' . $columnName, $operator, $v, $this->getGrid()->getGridFilterQueryType());
                     }

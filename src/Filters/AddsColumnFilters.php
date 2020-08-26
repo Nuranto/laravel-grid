@@ -13,7 +13,6 @@ trait AddsColumnFilters
 {
     // filters
     protected static $FILTER_DATE = "date";
-    protected static $FILTER_DATE_RANGE = "daterange";
     protected static $FILTER_TEXT = "text";
     protected static $FILTER_SELECT = "select";
     protected static $FILTER_MULTISELECT = "multiselect";
@@ -42,14 +41,6 @@ trait AddsColumnFilters
                     {
                         $filterInstance = $this->addDateFilter(
                             $filterEnabled, $columnName, $filterDataAttributes, $filterClass
-                        );
-                        break;
-                    }
-                case self::$FILTER_DATE_RANGE:
-                    {
-                        // uses https://github.com/dangrossman/bootstrap-daterangepicker.git
-                        $filterInstance = $this->addTextFilter(
-                            $filterEnabled, $columnName, $filterClass . ' date-range'
                         );
                         break;
                     }
@@ -112,7 +103,7 @@ trait AddsColumnFilters
             'enabled' => $enabled,
             'formId' => $this->getFilterFormId(),
             'class' => 'form-control grid-datepicker grid-filter ' . $elementClass,
-            'type' => 'text', // just use text, since its text input
+            'type' => 'date', // just use text, since its text input
             'title' => 'filter by ' . $elementId,
             'dataAttributes' => $filterDataAttributes
         ]);

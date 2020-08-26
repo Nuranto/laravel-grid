@@ -157,9 +157,11 @@ class GenericFilter implements Htmlable
         }
         switch ($this->type) {
             case 'text':
-                // all filters apart from dropdowns are rendered as text elements.
-                // css classes or js libraries can be used to change this
                 return view('leantony::grid.filters.text', $this->compactData(
+                    Arr::collapse(func_get_args())
+                ))->render();
+            case 'date':
+                return view('leantony::grid.filters.date', $this->compactData(
                     Arr::collapse(func_get_args())
                 ))->render();
             case 'select':
