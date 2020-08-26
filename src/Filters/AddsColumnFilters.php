@@ -14,6 +14,7 @@ trait AddsColumnFilters
     // filters
     protected static $FILTER_DATE = "date";
     protected static $FILTER_TEXT = "text";
+    protected static $FILTER_NUMBER = "number";
     protected static $FILTER_SELECT = "select";
     protected static $FILTER_MULTISELECT = "multiselect";
     protected static $FILTER_BOOLEAN = "boolean";
@@ -37,6 +38,13 @@ trait AddsColumnFilters
         $filterInstance = null;
         if (!$filterType instanceof GenericFilter) {
             switch ($filterType) {
+                case self::$FILTER_NUMBER:
+                    {
+                        $filterInstance = $this->addNumberFilter(
+                            $filterEnabled, $columnName, $filterDataAttributes, $filterClass
+                        );
+                        break;
+                    }
                 case self::$FILTER_DATE:
                     {
                         $filterInstance = $this->addDateFilter(
@@ -104,6 +112,26 @@ trait AddsColumnFilters
             'formId' => $this->getFilterFormId(),
             'class' => 'form-control grid-datepicker grid-filter ' . $elementClass,
             'type' => 'date', // just use text, since its text input
+            'title' => 'filter by ' . $elementId,
+            'dataAttributes' => $filterDataAttributes
+        ]);
+        return $filter;
+    }
+    
+    protected function addNumberFilter(
+        $enabled,
+        $elementId,
+        array $filterDataAttributes,
+        $elementClass = null
+    ): GenericFilter
+    {
+        $filter = new GenericFilter([
+            'name' => $elementId,
+            'id' => $this->createElementId($elementId),
+            'enabled' => $enabled,
+            'formId' => $this->getFilterFormId(),
+            'class' => 'form-control grid-numberpicker grid-filter ' . $elementClass,
+            'type' => 'number', // just use text, since its text input
             'title' => 'filter by ' . $elementId,
             'dataAttributes' => $filterDataAttributes
         ]);

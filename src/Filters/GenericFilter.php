@@ -164,6 +164,10 @@ class GenericFilter implements Htmlable
                 return view('leantony::grid.filters.date', $this->compactData(
                     Arr::collapse(func_get_args())
                 ))->render();
+            case 'number':
+                return view('leantony::grid.filters.number', $this->compactData(
+                    Arr::collapse(func_get_args())
+                ))->render();
             case 'select':
             case 'multiselect':
                 return view('leantony::grid.filters.dropdown', $this->compactData(
