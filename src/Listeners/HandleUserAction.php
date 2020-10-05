@@ -37,9 +37,7 @@ class HandleUserAction
         }
         
         if (!empty($event->request->query())) {
-            if (!in_array($parametersKey, ['export'])) {
-                $event->request->session()->put($parametersKey, $event->request->query());
-            }
+            $event->request->session()->put($parametersKey, $event->request->query());
 
             if ($event->request->has($event->grid->getGridSearchParam())) {
                 // search
