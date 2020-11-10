@@ -1,4 +1,4 @@
-<div class="row">
+<div class="">
 <p class="position-relative p-0 m-0">
 <input type="text" name="{{ $name }}[from]" id="{{ $id }}_from"
        form="{{ $formId }}"
