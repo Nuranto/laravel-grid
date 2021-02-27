@@ -88,11 +88,6 @@ return [
         'param' => 'q',
 
         /**
-         * The SQL query type used to conditionally search data
-         */
-        'query_type' => 'or',
-
-        /**
          * The view used to display a search form
          */
         'view' => 'leantony::grid.search'

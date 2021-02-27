@@ -47,7 +47,7 @@ class GridPaginationHandler
         }
         $pageSize = $this->getGrid()->getGridPaginationPageSize();
 
-        return $this->getQuery()->paginate($pageSize);
+        return $this->getQuery()->paginate($pageSize, ['*'], 'p-'.$this->getGrid()->getId());
     }
 
     /**
@@ -59,6 +59,6 @@ class GridPaginationHandler
     {
         $pageSize = $this->getGrid()->getGridPaginationPageSize();
 
-        return $this->getQuery()->simplePaginate($pageSize);
+        return $this->getQuery()->simplePaginate($pageSize, ['*'], 'p-'.$this->getGrid()->getId());
     }
 }

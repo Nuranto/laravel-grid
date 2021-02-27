@@ -279,7 +279,7 @@ trait RendersGrid
             'colSize' => $this->getGridToolbarSize()[0], // size
             'action' => $this->getSearchUrl(),
             'id' => $this->getSearchFormId(),
-            'name' => $this->getGridSearchParam(),
+            'name' => $this->getGridSearchParam() . '-' . $this->getId(),
             'dataAttributes' => [],
             'placeholder' => $this->getSearchPlaceholder(),
         ];

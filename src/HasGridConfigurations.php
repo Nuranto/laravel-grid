@@ -63,11 +63,6 @@ trait HasGridConfigurations
     /**
      * @var string
      */
-    private $searchType;
-
-    /**
-     * @var string
-     */
     private $searchView;
 
     /**
@@ -349,13 +344,6 @@ trait HasGridConfigurations
         return $this->filterType;
     }
 
-    public function getGridSearchQueryType(): string
-    {
-        if ($this->searchType === null) {
-            $this->searchType = config('grid.search.query_type', 'or');
-        }
-        return $this->searchType;
-    }
 
     public function getGridExportTypes(): array
     {

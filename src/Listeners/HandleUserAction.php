@@ -38,7 +38,7 @@ class HandleUserAction
         
         if (!empty($event->request->query())) {
             $queryParams = $event->request->query();
-            foreach(['export'] as $field) {
+            foreach(['export', $event->grid->getGridSearchParam() . '-' . $event->grid->getId()] as $field) {
                 if(isset($queryParams[$field])) {
                     unset($queryParams[$field]);
                 } 
@@ -47,7 +47,7 @@ class HandleUserAction
                 $event->request->session()->put($parametersKey, $queryParams);
             }
 
-            if ($event->request->has($event->grid->getGridSearchParam())) {
+            if ($event->request->has($event->grid->getGridSearchParam() . '-' . $event->grid->getId())) {
                 // search
                 (new SearchDataHandler(
                     $event->grid, $event->request,
