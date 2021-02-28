@@ -11,7 +11,7 @@
             @if($icon)
                 <i class="fa {{ $icon }}"></i>
             @endif
-            {{ $name }}
+            {{ is_callable($name) ? call_user_func($name, $gridName, $gridItem) : $name }}
         </a>
     @endif
 @else
@@ -27,7 +27,7 @@
             @if($icon)
                 <i class="fa {{ $icon }}"></i>
             @endif
-            {{ $name }}
+            {{ is_callable($name) ? call_user_func($name, $gridName, $gridItem) : $name }}
         </a>
     @endif
 @endif

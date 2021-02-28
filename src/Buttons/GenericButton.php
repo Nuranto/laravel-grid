@@ -216,18 +216,18 @@ class GenericButton implements Htmlable
     }
 
     /**
-     * @return string
+     * @return string|callable
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * @param string|callable $name
      * @return GenericButton
      */
-    public function setName(string $name): GenericButton
+    public function setName($name): GenericButton
     {
         $this->name = $name;
         return $this;
