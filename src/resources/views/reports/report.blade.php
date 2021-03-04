@@ -10,7 +10,7 @@
         <tr>
             @foreach($columns as $column)
                 <th class="tg-s4m5">
-                    {{ $column->name }}
+                    {{ __($column->name) }}
                 </th>
             @endforeach
         </tr>

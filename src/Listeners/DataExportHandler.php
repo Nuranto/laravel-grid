@@ -105,7 +105,7 @@ class DataExportHandler
                         'exportableColumns' => $this->getExportableColumns()[1],
                         'fileName' => $this->getFileNameForExport(),
                         'exportView' => $this->getGridExportView(),
-                        'title' => $this->getGrid()->getName() . ' PDF report data'
+                        'title' => __($this->getGrid()->getName())
                     ]);
                 }
             case 'csv':
@@ -130,7 +130,7 @@ class DataExportHandler
                         'exportableColumns' => $this->getExportableColumns()[1],
                         'fileName' => $this->getFileNameForExport(),
                         'exportView' => $this->getGridExportView(),
-                        'title' => $this->getGrid()->getName() . ' HTML report data'
+                        'title' => __($this->getGrid()->getName())
                     ]);
                 }
             case 'json':
