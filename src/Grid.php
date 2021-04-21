@@ -46,7 +46,7 @@ abstract class Grid implements Htmlable, GridInterface, GridButtonsInterface, Gr
      *
      * @var string
      */
-    protected $id = 'grid-leantony';
+    protected $id;
 
     /**
      * The name of the grid
@@ -166,7 +166,7 @@ abstract class Grid implements Htmlable, GridInterface, GridButtonsInterface, Gr
     public function init()
     {
         // the grid ID
-        $this->id = Str::singular(Str::camel($this->name)) . '-' . 'grid';
+        $this->id = ($this->id ?: Str::singular(Str::camel($this->name))) . '-' . 'grid';
         // short singular name
         $this->shortSingularName = $this->shortSingularGridName();
         // short grid identifier
