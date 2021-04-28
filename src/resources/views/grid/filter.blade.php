@@ -21,7 +21,7 @@
                     <button type="submit"
                             class="btn btn-outline-primary grid-reset-button"
                             title="{{ __('Filter filters') }}"
-                            onclick="javascript:jQuery(this).parent().find('.grid_filter_reset').val(1);return true;"
+                            onclick="javascript:jQuery(this).parent().find('.grid_filter_reset').val('{{ $grid->getSessionFiltersKey() }}');return true;"
                             form="{{ $formId }}"><i class="fas fa-minus"></i> {{ __('Reset') }}
                     </button>
                 @endif

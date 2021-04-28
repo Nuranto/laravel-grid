@@ -447,7 +447,7 @@ abstract class Grid implements Htmlable, GridInterface, GridButtonsInterface, Gr
     }
     
     public function getSessionFiltersKey() {
-        return 'grid_params_'.get_class($this);
+        return 'grid_params_'.strtolower(str_replace('\\', '_', get_class($this)));
     }
     
     public function getSessionFilters($strict = false) {

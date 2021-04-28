@@ -31,14 +31,14 @@ class HandleUserAction
         $parametersKey = $event->grid->getSessionFiltersKey();
         if ($event->grid->saveFiltersInSession() && empty($event->request->query()) && $event->request->session()->has($parametersKey)) {
             $event->request->merge($event->request->session()->get($parametersKey));
-        } elseif($event->request->query('reset')) {
+        } elseif($event->request->query('reset') == $parametersKey) {
             $event->request->session()->forget($parametersKey);
             \App::abort(302, '', ['Location' => url()->current()]);
         }
         
         if (!empty($event->request->query())) {
             $queryParams = $event->request->query();
-            foreach(['export', $event->grid->getGridSearchParam() . '-' . $event->grid->getId()] as $field) {
+            foreach(['reset', 'export', $event->grid->getGridSearchParam() . '-' . $event->grid->getId()] as $field) {
                 if(isset($queryParams[$field])) {
                     unset($queryParams[$field]);
                 } 
