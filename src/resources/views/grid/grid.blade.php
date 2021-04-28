@@ -29,7 +29,7 @@
                             <th scope="col"
                                 class="{{ is_callable($column->columnClass) ? call_user_func($column->columnClass) : $column->columnClass }}"
                                 title="click to sort by {{ $column->key }}">
-                                <a data-trigger-pjax="1" class="data-sort"
+                                <a data-trigger-pjax="1" class="data-sort" data-pjax-target="#{{ $grid->getId() }}"
                                    href="{{ $grid->getSortUrl($column->key, $grid->getSelectedSortDirection()) }}">
                                     @if($column->useRawHtmlForLabel)
                                         {!! $column->name !!}
@@ -51,7 +51,7 @@
                         @if($column->isSortable)
                             <th scope="col" title="click to sort by {{ $column->key }}"
                                 class="{{ is_callable($column->columnClass) ? call_user_func($column->columnClass) : $column->columnClass }}">
-                                <a data-trigger-pjax="1" class="data-sort"
+                                <a data-trigger-pjax="1" class="data-sort" data-pjax-target="#{{ $grid->getId() }}"
                                    href="{{ $grid->getSortUrl($column->key, $grid->getSelectedSortDirection()) }}">
                                     @if($column->useRawHtmlForLabel)
                                         {!! $column->name !!}
