@@ -1,5 +1,5 @@
 @php
-$value = request($name);
+$value = request($name) ?: request(str_replace('.', '_', $name));
 if(is_string($value)) {
     $value = explode(',', $value);
 }

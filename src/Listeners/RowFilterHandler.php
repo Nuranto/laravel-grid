@@ -47,8 +47,9 @@ class RowFilterHandler
                 if (!$this->canFilter($columnName, $columnData)) {
                     continue;
                 }
+                $userInput = $this->getRequest()->get($columnName) ?: $this->getRequest()->get(str_replace('.', '_', $columnName));
                 // user input check
-                if (!$this->canUseProvidedUserInput($this->getRequest()->get($columnName))) {
+                if (!$this->canUseProvidedUserInput($userInput)) {
                     continue;
                 }
                 // column check. Since the column data is coming from a user query
@@ -58,7 +59,7 @@ class RowFilterHandler
                 $operator = $this->extractFilterOperator($columnName, $columnData)['operator'];
                 $logicalOperator = $this->extractFilterLogicalOperator($columnName, $columnData)['logical_operator'];
                 
-                $this->doFilter($columnName, $columnData, $operator, $this->getRequest()->get($columnName), $logicalOperator);
+                $this->doFilter($columnName, $columnData, $operator, $userInput, $logicalOperator);
             }
         }
     }
