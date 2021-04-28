@@ -38,11 +38,15 @@ class HandleUserAction
         
         if (!empty($event->request->query())) {
             $queryParams = $event->request->query();
-            foreach(['reset', 'export', $event->grid->getGridSearchParam() . '-' . $event->grid->getId()] as $field) {
-                if(isset($queryParams[$field])) {
-                    unset($queryParams[$field]);
-                } 
+            $validColumns = $event->validTableColumns;
+
+            foreach($queryParams as $queryParam => $queryValue) {
+                $queryParamCandidate = str_replace($event->grid->getGridDatabaseTable()().'_', '', $queryParam);
+                if(!in_array($queryParamCandidate, $validColumns) && $queryParam != 'p-'.$event->grid->getId()) {
+                    unset($queryParams[$queryParam]);
+                }
             }
+
             if (!empty($queryParams)) {
                 $event->request->session()->put($parametersKey, $queryParams);
             }

@@ -48,6 +48,7 @@ class RowFilterHandler
                     continue;
                 }
                 $userInput = $this->getRequest()->get($columnName) ?: $this->getRequest()->get(str_replace('.', '_', $columnName));
+                $columnName = str_replace($this->grid->getGridDatabaseTable()().'.', '', $columnName);
                 // user input check
                 if (!$this->canUseProvidedUserInput($userInput)) {
                     continue;
