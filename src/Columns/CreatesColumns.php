@@ -68,7 +68,9 @@ trait CreatesColumns
         $columns = [];
         // process
         foreach ($this->columns as $columnName => $columnData) {
-
+            
+            $columnName = str_replace($this->getGridDatabaseTable()().'.', '', $columnName);
+            
             // string in place of column data
             if (!is_array($columnData)) {
                 $columnData = $this->getGridDefaultColumnDataOptions();
